@@ -346,7 +346,9 @@ handle_body(Headers, ReqType0, Body0, Client) ->
             S = erlang:size(Body0),
             CT = hackney_headers:get_value(<<"content-type">>, Headers,
                                            <<"application/octet-stream">>),
-            {S, CT, Body0}
+            {S, CT, Body0};
+
+        _ -> {false, false, false}
     end,
 
     {NewHeaders, ReqType} = case {ReqType0, Body} of
